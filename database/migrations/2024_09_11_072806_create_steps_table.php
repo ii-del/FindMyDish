@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('steps', function (Blueprint $table) {
             $table->id();
-            $table->string('recipe_id', 100);
+            $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
             $table->string('body', 500);
-            $table->string('image', 100)->nullable();
+            $table->string('image', 200)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
