@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id', 100);
-            $table->string('name', 15);
-            $table->string('image', 100)->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('name', 100);
+            $table->string('image', 200)->nullable();
             $table->integer('headcount');
             $table->timestamps();
             $table->softDeletes();
