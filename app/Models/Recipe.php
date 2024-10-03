@@ -14,12 +14,19 @@ class Recipe extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function ingredient()
+    public function ingredients()
     {
         return $this->hasMany(Ingredient::class);
     }
-    public function step()
+    public function steps()
     {
         return $this->hasMany(Step::class);
     }
+    
+    protected $fillable = [
+        'user_id',
+        'name',
+        'image',
+        'headcount',
+    ];
 }
