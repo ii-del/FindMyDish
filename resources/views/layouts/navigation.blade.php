@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-green-200 border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-amber-100 border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -16,10 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('recipes.index')" :active="request()->routeIs('recipes.index')">
-                        {{ __('Index') }}
+                        {{ __('レシピ一覧') }}
                     </x-nav-link>
                     <x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
-                        {{ __('Create') }}
+                        {{ __('レシピ作成') }}
                     </x-nav-link>
 
                 </div>
