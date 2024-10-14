@@ -14,7 +14,7 @@ class RecipeController extends Controller
     public function index(Recipe $recipe)
     {
         // 全てのレシピを取得し、各レシピに関連する材料と手順も一緒に取得
-        $recipes = $recipe->with(['ingredients', 'steps'])->get();
+        //$recipes = $recipe->with(['ingredients', 'steps'])->get();
         
         return view('recipes.index')->with(['recipes' => $recipes]);
     }
