@@ -3,57 +3,64 @@
         <h1 class="title_form">FindMyDish</h1>
     </x-slot>
     <form action="/recipes" method="POST" enctype='multipart/form-data'>
-        @csrf
-        <div class="recipe">
-            <h2>料理名</h2>
-            <input type="file" name="recipe[image]"><br>
-            <input type="text" name="recipe[name]" placeholder="料理名">{{ old('recipe.name') }}</input>
-            <p class="name__error" style="color:red">{{ $errors->first('recipe.name') }}</p>
-            <input type='number' name="recipe[headcount]" placeholder="何人前">{{ old('recipe.headcount') }}</input>人前
-            <p class="headcount__error" style="color:red">{{ $errors->first('recipe.headcount') }}</p>
-        </div>
-        
-        <div class="ingredients-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>材料</th>
-                        <th>分量</th>
-                        <th>単位</th>
-                    <tr>
-                </thead>
-                <div class="ingredient">
-                <tbody>
-                    <tr>
-                        <td>
-                            <input type="text" name="ingredient[1][name]" placeholder="材料" value="{{ old('ingredient.name') }}">
-                            <p class="name__error" style="color:red">{{ $errors->first('ingredient.name') }}</p>
-                        </td>
-                        <td>
-                            <input type="number" step="0.01" name="ingredient[1][amount]" placeholder="分量" value="{{ old('ingredient.amount') }}">
-                            <p class="amount__error" style="color:red">{{ $errors->first('ingredient.amount') }}</p>
-                        </td>
-                        <td>
-                            <input type="text" name="ingredient[1][unit]" placeholder="単位" value="{{ old('ingredient.unit') }}">
-                            <p class="unit__error" style="color:red">{{ $errors->first('ingredient.unit') }}</p>
-                        </td>
-                    </tr>
-                </tbody>
+        <div class="py-5">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-orange-100 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        @csrf
+                        <div class="recipe">
+                            <h2>料理名</h2><br>
+                            <input type="file" name="recipe[image]"><br>
+                            <input type="text" name="recipe[name]" placeholder="料理名">{{ old('recipe.name') }}</input>
+                            <p class="name__error" style="color:red">{{ $errors->first('recipe.name') }}</p>
+                            <input type='number' name="recipe[headcount]" placeholder="何人前">{{ old('recipe.headcount') }}</input>人前
+                            <p class="headcount__error" style="color:red">{{ $errors->first('recipe.headcount') }}</p>
+                        </div>
+                        
+                        <div class="ingredients-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>材料</th>
+                                        <th>分量</th>
+                                        <th>単位</th>
+                                    <tr>
+                                </thead>
+                                <div class="ingredient">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="ingredient[1][name]" placeholder="材料" value="{{ old('ingredient.name') }}">
+                                            <p class="name__error" style="color:red">{{ $errors->first('ingredient.name') }}</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" step="0.01" name="ingredient[1][amount]" placeholder="分量" value="{{ old('ingredient.amount') }}">
+                                            <p class="amount__error" style="color:red">{{ $errors->first('ingredient.amount') }}</p>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="ingredient[1][unit]" placeholder="単位" value="{{ old('ingredient.unit') }}">
+                                            <p class="unit__error" style="color:red">{{ $errors->first('ingredient.unit') }}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                </div>
+                            </table>
+                        </div>
+                        <button id="add_ingredient" type="button">追加</button>
+                        <div class="steps-container">
+                            <h2>手順</h2>
+                            <div class="step">
+                                手順(1)：
+                                <textarea rows="2" cols="50" name="step[1][body]" placeholder="料理手順を入力してください">{{ old('step.body') }}</textarea>
+                                <p class="body__error" style="color:red">{{ $errors->first('step.body') }}</p>
+                            </div>
+                        </div>
+                        <button id="add_step" type="button">追加</button>
+                        </br>
+                    </div>
                 </div>
-            </table>
-        </div>
-        <button id="add_ingredient" type="button">追加</button>
-        <div class="steps-container">
-            <h2>手順</h2>
-            <div class="step">
-                <h2>手順(1)：</h2>
-                <textarea rows="2" cols="50" name="step[1][body]" placeholder="料理手順を入力してください">{{ old('step.body') }}</textarea>
-                <p class="body__error" style="color:red">{{ $errors->first('step.body') }}</p>
             </div>
         </div>
-        <button id="add_step" type="button">追加</button>
-        </br>
-
         
         <button type="submit">保存</button>
     </form>
