@@ -14,4 +14,10 @@ class Step extends Model
     {
         return $this->belongsTo(Recipe::class);
     }
+    
+    protected $fillable = [
+        'recipe_id',
+        'body',
+        'image',
+    ];
 }

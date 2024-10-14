@@ -14,4 +14,11 @@ class Ingredient extends Model
     {
         return $this->belongsTo(Recipe::class);
     }
+    
+    protected $fillable = [
+        'recipe_id',
+        'name',
+        'amount',
+        'unit',
+    ];
 }
