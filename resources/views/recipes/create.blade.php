@@ -1,5 +1,7 @@
 <x-app-layout>
-    <h1>FindMyDish</h1>
+    <x-slot name='header'>
+        <h1 class="title_form">FindMyDish</h1>
+    </x-slot>
     <form action="/recipes" method="POST" enctype='multipart/form-data'>
         @csrf
         <div class="recipe">
@@ -45,7 +47,7 @@
             <h2>手順</h2>
             <div class="step">
                 <h2>手順(1)：</h2>
-                <textarea name="step[body]" placeholder="料理手順を入力してください">{{ old('step.body') }}</textarea>
+                <textarea name="step[1][body]" placeholder="料理手順を入力してください">{{ old('step.body') }}</textarea>
                 <p class="body__error" style="color:red">{{ $errors->first('step.body') }}</p>
             </div>
         </div>
@@ -100,7 +102,7 @@
         });
     </script>
     
-     <script>
+    <script>
         document.querySelector('#add_step').addEventListener('click', () => {
               const formCount = document.querySelectorAll('div.step').length + 1;
               
@@ -108,6 +110,7 @@
               const newForm_step = document.createElement('textarea');
               newForm_step.rows = 2;  // 縦の行数
               newForm_step.cols = 50; // 横幅
+              newForm_step.name = 'step[' + formCount + '][body]';
               const newLabel_step = document.createElement('label');
               newLabel_step.textContent = `手順(${formCount})：`;
               newLabel_step.appendChild(newForm_step);
