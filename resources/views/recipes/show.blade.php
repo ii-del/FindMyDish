@@ -4,7 +4,7 @@
     </x-slot>
     <link rel="stylesheet" href="./css/style.css">
         
-    <input type="number" id="multiplier" placeholder="倍数を入力してください">
+    <input type="number" id="multiplier" placeholder="人数を入力してください">
     <button onclick="calculateMultiple()">変更</button>
     
     <div class="py-12">

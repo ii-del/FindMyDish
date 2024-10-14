@@ -47,7 +47,7 @@
             <h2>手順</h2>
             <div class="step">
                 <h2>手順(1)：</h2>
-                <textarea name="step[1][body]" placeholder="料理手順を入力してください">{{ old('step.body') }}</textarea>
+                <textarea rows="2" cols="50" name="step[1][body]" placeholder="料理手順を入力してください">{{ old('step.body') }}</textarea>
                 <p class="body__error" style="color:red">{{ $errors->first('step.body') }}</p>
             </div>
         </div>
@@ -62,44 +62,45 @@
 
     <div class="back">[<a href="/recipes">back</a>]</div>
     
-    <script>
-        document.querySelector('#add_ingredient').addEventListener('click', () => {
-              const formCount = document.querySelectorAll('div.ingredient').length + 1;
-              
-              // 項目1：材料名
-              const newForm_name = document.createElement('input');
-              newForm_name.type = 'text';
-              newForm_name.name = 'ingredient[' + formCount + '][name]';
-              const newLabel_name = document.createElement('label');
-              //newLabel_name.textContent = `材料(${formCount})：`;
-              newLabel_name.appendChild(newForm_name);
-              
-              // 項目2：分量
-              const newForm_amount = document.createElement('input');
-              newForm_amount.type = 'number';
-              newForm_amount.name = 'ingredient[' + formCount + '][amount]';
-              const newLabel_amount = document.createElement('label');
-              //newLabel_amount.textContent = `分量(${formCount})：`;
-              newLabel_amount.appendChild(newForm_amount);
-              
-              // 項目3：単位
-              const newForm_unit = document.createElement('input');
-              newForm_unit.type = 'text';
-              newForm_unit.name = 'ingredient[' + formCount + '][unit]';
-              const newLabel_unit = document.createElement('label');
-              //newLabel_unit.textContent = `単位(${formCount})：`;
-              newLabel_unit.appendChild(newForm_unit);
-              
-              // 全てを1つのdivにまとめる
-              const newDiv = document.createElement('div');
-              newDiv.classList.add('ingredient');
-              newDiv.appendChild(newLabel_name);
-              newDiv.appendChild(newLabel_amount);
-              newDiv.appendChild(newLabel_unit);
+   <script>
+    document.querySelector('#add_ingredient').addEventListener('click', () => {
+        const formCount = document.querySelectorAll('div.ingredient').length + 1;
+
+        // 項目1：材料名
+        const newForm_name = document.createElement('input');
+        newForm_name.type = 'text';
+        newForm_name.name = 'ingredient[' + formCount + '][name]';
+
+        // 項目2：分量
+        const newForm_amount = document.createElement('input');
+        newForm_amount.type = 'number';
+        newForm_amount.step = '0.01';
+        newForm_amount.name = 'ingredient[' + formCount + '][amount]';
+
+        // 項目3：単位
+        const newForm_unit = document.createElement('input');
+        newForm_unit.type = 'text';
+        newForm_unit.name = 'ingredient[' + formCount + '][unit]';
         
-              // 親のdivに追加する
-              document.querySelector('div.ingredients-container').appendChild(newDiv);
-        });
+        
+        // tdタグで各項目を囲む
+        const tdName = document.createElement('td');
+        const tdAmount = document.createElement('td');
+        const tdUnit = document.createElement('td');
+
+        tdName.appendChild(newForm_name);
+        tdAmount.appendChild(newForm_amount);
+        tdUnit.appendChild(newForm_unit);
+
+        // trタグを作成し、tdを追加
+        const newRow = document.createElement('tr');
+        newRow.appendChild(tdName);
+        newRow.appendChild(tdAmount);
+        newRow.appendChild(tdUnit);
+
+        // tbodyに新しい行を追加
+        document.querySelector('tbody').appendChild(newRow);
+    });
     </script>
     
     <script>
