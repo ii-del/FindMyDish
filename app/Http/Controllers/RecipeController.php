@@ -11,11 +11,6 @@ use App\Http\Requests\RecipeRequest;
 
 class RecipeController extends Controller
 {
-    // public function index(Recipe $recipe, Ingredient $ingredient, Step $step)
-    // {
-    //     return view('recipes.index')->with(['recipes' => $recipe->get(), 'indredient' => $ingredient->get(), 'step' => $step->get()]);
-    // }
-    
     public function index(Recipe $recipe)
     {
         // 全てのレシピを取得し、各レシピに関連する材料と手順も一緒に取得
@@ -37,20 +32,28 @@ class RecipeController extends Controller
         $recipe->fill($input_recipe)->save();
         
         // 手順
-        $input_step = $request['step'];
-        $input_step['recipe_id'] = $recipe->id;
-        $step->fill($input_step)->save();
+        foreach($request['step'] as $number => $input_step){
+            $input_step['recipe_id'] = $recipe->id;
+            $newStep = new Step();
+            $newStep->fill($input_step)->save();
+        }
         
         // 材料
         foreach($request['ingredient'] as $number => $input_ingredient){
             $input_ingredient['recipe_id'] = $recipe->id;
-            //$ingredient->fill($input_ingredient)->save();
             $newIngredient = new Ingredient();
             $newIngredient->fill($input_ingredient)->save();
         }
         
         return redirect('/recipes');
     }
+    
+    public function show(Recipe $recipe)
+    {
+        
+        return view('recipes.show')->with(['recipe' => $recipe]);
+    }
+
     
     public function store_img(Request $request)
     {
